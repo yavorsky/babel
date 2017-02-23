@@ -115,6 +115,7 @@ function plainFunction(path: NodePath, callId: Object) {
 
   if (isDeclaration) {
     node.type = "FunctionExpression";
+    path.type = "FunctionExpression";
   }
 
   let built = t.callExpression(callId, [node]);
