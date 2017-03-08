@@ -6,7 +6,8 @@
     "test": "make test",
     "build": "make build",
     "lint": "make lint",
-    "fix": "make fix"
+    "fix": "make fix",
+    "postinstall": "node ./check-dev-engines.js"
   },
   "devDependencies": {
     "async": "^1.5.0",
@@ -46,8 +47,9 @@
     "uglify-js": "^2.4.16"
   },
   "devEngines": {
-    "node": ">= 0.10 <= 7.x",
-    "npm": "2.x || 3.x || 4.x"
+    "node": "4.x || 5.x || 6.x || 7.x",
+    "npm": "2.x || 3.x || 4.x",
+    "yarn": "0.x"
   },
   "babel": {
     "comments": false,
