@@ -7,13 +7,14 @@ import { findConfigs, loadConfig } from "./loading/files";
 export default function buildConfigChain(opts: Object = {}) {
   const filename = opts.filename ? path.resolve(opts.filename) : null;
   const builder = new ConfigChainBuilder(filename);
+  const dirname = filename ? path.dirname(filename) : process.cwd();
 
   try {
     builder.mergeConfig({
       type: "arguments",
       options: opts,
       alias: "base",
-      dirname: process.cwd(),
+      dirname: dirname,
     });
 
     // resolve all .babelrc files
