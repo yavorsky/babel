@@ -227,10 +227,31 @@ export default class Tokenizer extends LocationParser {
     }
   }
 
+  readToken_is(): void {
+    const third = this.input.charCodeAt(this.state.pos + 2);
+    const fourth = this.input.charCodeAt(this.state.pos + 3);
+    const fifth = this.input.charCodeAt(this.state.pos + 4);
+    if (third === 110 && fourth === 116 && !isIdentifierChar(fifth)) {
+      // isnt
+      this.finishOp(tt.awesomeEquality, 4);
+      return;
+    } else if (!isIdentifierChar(third)) {
+      // is
+      this.finishOp(tt.awesomeEquality, 2);
+      return;
+    }
+    this.readWord();
+    return;
+  }
+
   readToken(code: number): void {
     // Identifier or keyword. '\uXXXX' sequences are allowed in
     // identifiers, so '\' also dispatches to that.
-    if (isIdentifierStart(code) || code === 92 /* '\' */) {
+    const next = this.input.charCodeAt(this.state.pos + 1);
+    if (isIdentifierStart(code) && code === 105 && next === 115) {
+      //is
+      this.readToken_is();
+    } else if (isIdentifierStart(code) || code === 92 /* '\' */) {
       this.readWord();
     } else {
       this.getTokenFromCode(code);

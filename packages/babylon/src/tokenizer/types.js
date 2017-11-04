@@ -139,6 +139,7 @@ export const types: { [name: string]: TokenType } = {
   bitwiseXOR: new BinopTokenType("^", 4),
   bitwiseAND: new BinopTokenType("&", 5),
   equality: new BinopTokenType("==/!=", 6),
+  awesomeEquality: new BinopTokenType("is/isnt", 6),
   relational: new BinopTokenType("</>", 7),
   bitShift: new BinopTokenType("<</>>", 8),
   plusMin: new TokenType("+/-", { beforeExpr, binop: 9, prefix, startsExpr }),
